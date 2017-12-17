@@ -8,16 +8,16 @@
     android:layout_height="match_parent"
     tools:context="me.cpele.traintimer.MainActivity">
 
-    <me.cpele.traintimer.TrainTimer
+    <me.cpele.traintimer.TrainTimerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        custom:arrival_datetime="0"
+        custom:arrival_datetime="1540561680"
         custom:arrival_station="Dax"
-        custom:departure_datetime="0"
+        custom:departure_datetime="1540552080"
         custom:departure_station="Gare de Lyon"
         />
 
