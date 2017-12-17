@@ -1,4 +1,4 @@
-package me.cpele.ouitimer;
+package me.cpele.traintimer;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

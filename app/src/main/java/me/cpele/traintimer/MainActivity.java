@@ -1,4 +1,4 @@
-package me.cpele.ouitimer;
+package me.cpele.traintimer;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

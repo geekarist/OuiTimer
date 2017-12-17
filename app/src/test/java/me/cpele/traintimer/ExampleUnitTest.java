@@ -1,4 +1,4 @@
-package me.cpele.ouitimer;
+package me.cpele.traintimer;
 
 import org.junit.Test;
 
