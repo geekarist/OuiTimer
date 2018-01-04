@@ -51,4 +51,20 @@ public class TrainTimerView extends ConstraintLayout {
         TextView arrivalStationTextView = findViewById(R.id.timer_tv_arrival_station);
         arrivalStationTextView.setText(arrivalStation);
     }
+
+    public void setDepartureDateTime(int millis) {
+
+    }
+
+    public void setDepartureStation(String departure) {
+
+    }
+
+    public void setArrivalDateTime(int millis) {
+
+    }
+
+    public void setArrivalStation(String arrival) {
+
+    }
 }
