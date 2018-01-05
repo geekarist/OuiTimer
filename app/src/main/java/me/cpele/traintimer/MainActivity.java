@@ -14,8 +14,18 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView recyclerView = findViewById(R.id.main_rv);
         TimerAdapter adapter = new TimerAdapter();
-        adapter.add(new TimerItem());
-        adapter.add(new TimerItem());
+        adapter.add(new TimerItem(
+                1540552080,
+                "Gare de Lyon",
+                1540561680,
+                "Dax"
+        ));
+        adapter.add(new TimerItem(
+                1540552080,
+                "Gare d'Austerlitz",
+                1540561680,
+                "Montbard"
+        ));
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
