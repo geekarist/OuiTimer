@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,15 +15,15 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = findViewById<RecyclerView>(R.id.main_rv)
         val adapter = TimerAdapter()
         adapter.add(TimerItem(
-                1540552080,
+                GregorianCalendar(2018, Calendar.FEBRUARY, 5, 13, 42, 23).time,
                 "Gare de Lyon",
-                1540561680,
+                GregorianCalendar(2018, Calendar.FEBRUARY, 5, 17, 41, 59).time,
                 "Dax"
         ))
         adapter.add(TimerItem(
-                1540552080,
+                GregorianCalendar(2018, Calendar.APRIL, 23, 12, 24, 16).time,
                 "Gare d'Austerlitz",
-                1540561680,
+                GregorianCalendar(2018, Calendar.APRIL, 23, 15, 22, 19).time,
                 "Montbard"
         ))
         recyclerView.adapter = adapter

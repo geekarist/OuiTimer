@@ -6,6 +6,7 @@ import android.text.format.DateUtils.*
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
+import java.util.*
 
 class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
@@ -39,16 +40,6 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         setArrivalStation(arrivalStation)
     }
 
-    fun setDepartureDateTime(departureDatetime: Long) {
-        val strDepartureDate = formatDateTime(
-                context,
-                departureDatetime,
-                FORMAT_SHOW_DATE or FORMAT_NO_YEAR or FORMAT_ABBREV_MONTH)
-        mDateTextView.text = strDepartureDate
-        val strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME)
-        mDepartureTimeTextView.text = strDepartureTime
-    }
-
     fun setArrivalStation(arrivalStation: String?) {
         mArrivalStationTextView.text = arrivalStation
     }
@@ -57,8 +48,21 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
         mDepartureStationTextView.text = departureStation
     }
 
-    fun setArrivalDateTime(arrivalDatetime: Long) {
+    fun setDepartureDateTime(departureDatetime: Date) = setDepartureDateTime(departureDatetime.time)
+    fun setArrivalDateTime(arrivalDatetime: Date) = setArrivalDateTime(arrivalDatetime.time)
+
+    private fun setArrivalDateTime(arrivalDatetime: Long) {
         val strArrivalTime = formatDateTime(context, arrivalDatetime, FORMAT_SHOW_TIME)
         mArrivalTimeTextView.text = strArrivalTime
+    }
+
+    private fun setDepartureDateTime(departureDatetime: Long) {
+        val strDepartureDate = formatDateTime(
+                context,
+                departureDatetime,
+                FORMAT_SHOW_DATE or FORMAT_NO_YEAR or FORMAT_ABBREV_MONTH)
+        mDateTextView.text = strDepartureDate
+        val strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME)
+        mDepartureTimeTextView.text = strDepartureTime
     }
 }

@@ -1,8 +1,10 @@
 package me.cpele.traintimer
 
+import java.util.*
+
 data class TimerItem(
-        val departureDateTime: Long,
+        val departureDateTime: Date,
         val departureStation: String,
-        val arrivalDateTime: Long,
+        val arrivalDateTime: Date,
         val arrivalStation: String
 )
