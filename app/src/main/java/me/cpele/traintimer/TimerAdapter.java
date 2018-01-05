@@ -31,7 +31,8 @@ class TimerAdapter extends RecyclerView.Adapter<TimerViewHolder> {
         return mItems.size();
     }
 
-    public void add(TimerItem timerItem) {
+    void add(TimerItem timerItem) {
         mItems.add(timerItem);
+        notifyDataSetChanged();
     }
 }

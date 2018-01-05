@@ -15,10 +15,16 @@ import static android.text.format.DateUtils.formatDateTime;
 
 public class TrainTimerView extends ConstraintLayout {
 
+    private final TextView mDateTextView;
+    private final TextView mDepartureTimeTextView;
+    private final TextView mArrivalTimeTextView;
+    private final TextView mDepartureStationTextView;
+    private final TextView mArrivalStationTextView;
+
     public TrainTimerView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
-        TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.TrainTimerView);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TrainTimerView);
         long departureDatetime = typedArray.getInteger(R.styleable.TrainTimerView_departure_datetime, 0);
         departureDatetime *= 1000;
         String departureStation = typedArray.getString(R.styleable.TrainTimerView_departure_station);
@@ -27,44 +33,42 @@ public class TrainTimerView extends ConstraintLayout {
         String arrivalStation = typedArray.getString(R.styleable.TrainTimerView_arrival_station);
         typedArray.recycle();
 
-        LayoutInflater.from(context)
+        LayoutInflater.from(getContext())
                 .inflate(R.layout.view_train_timer, this, true);
 
-        TextView dateTextView = findViewById(R.id.timer_tv_date);
+        mDateTextView = findViewById(R.id.timer_tv_date);
+        mDepartureTimeTextView = findViewById(R.id.timer_tv_departure_time);
+        mArrivalTimeTextView = findViewById(R.id.timer_tv_arrival_time);
+        mDepartureStationTextView = findViewById(R.id.timer_tv_departure_station);
+        mArrivalStationTextView = findViewById(R.id.timer_tv_arrival_station);
+
+        setDepartureDateTime(departureDatetime);
+        setArrivalDateTime(arrivalDatetime);
+        setDepartureStation(departureStation);
+        setArrivalStation(arrivalStation);
+    }
+
+    public void setDepartureDateTime(long departureDatetime) {
         String strDepartureDate = formatDateTime(
-                context,
+                getContext(),
                 departureDatetime,
                 FORMAT_SHOW_DATE | FORMAT_NO_YEAR | FORMAT_ABBREV_MONTH);
-        dateTextView.setText(strDepartureDate);
-
-        TextView departureTimeTextView = findViewById(R.id.timer_tv_departure_time);
-        String strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME);
-        departureTimeTextView.setText(strDepartureTime);
-
-        TextView arrivalTimeTextView = findViewById(R.id.timer_tv_arrival_time);
-        String strArrivalTime = formatDateTime(context, arrivalDatetime, FORMAT_SHOW_TIME);
-        arrivalTimeTextView.setText(strArrivalTime);
-
-        TextView departureStationTextView = findViewById(R.id.timer_tv_departure_station);
-        departureStationTextView.setText(departureStation);
-
-        TextView arrivalStationTextView = findViewById(R.id.timer_tv_arrival_station);
-        arrivalStationTextView.setText(arrivalStation);
+        mDateTextView.setText(strDepartureDate);
+        String strDepartureTime = formatDateTime(getContext(), departureDatetime, FORMAT_SHOW_TIME);
+        mDepartureTimeTextView.setText(strDepartureTime);
     }
 
-    public void setDepartureDateTime(int millis) {
-
+    public void setArrivalStation(String arrivalStation) {
+        mArrivalStationTextView.setText(arrivalStation);
     }
 
-    public void setDepartureStation(String departure) {
-
+    public void setDepartureStation(String departureStation) {
+        mDepartureStationTextView.setText(departureStation);
     }
 
-    public void setArrivalDateTime(int millis) {
-
+    public void setArrivalDateTime(long arrivalDatetime) {
+        String strArrivalTime = formatDateTime(getContext(), arrivalDatetime, FORMAT_SHOW_TIME);
+        mArrivalTimeTextView.setText(strArrivalTime);
     }
 
-    public void setArrivalStation(String arrival) {
-
-    }
 }

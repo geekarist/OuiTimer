@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.main_rv);
         TimerAdapter adapter = new TimerAdapter();
         adapter.add(new TimerItem());
+        adapter.add(new TimerItem());
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
