@@ -3,21 +3,23 @@
 <merge
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:custom="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:layout_height="wrap_content"
     tools:layout_width="match_parent"
     tools:parentTag="android.support.constraint.ConstraintLayout"
     >
 
-    <TextView
-        android:id="@+id/timer_tv_date"
+    <me.cpele.traintimer.CircularProgressView
+        android:id="@+id/timer_cp_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/timer_tv_departure_time"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="26 oct"
+        custom:arrival_datetime="1540561680"
+        custom:departure_datetime="1540552080"
         />
 
     <TextView
@@ -25,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@id/timer_tv_departure_time"
-        app:layout_constraintLeft_toRightOf="@id/timer_tv_date"
+        app:layout_constraintLeft_toRightOf="@id/timer_cp_date"
         app:layout_constraintRight_toLeftOf="@id/timer_tv_departure_station"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="11:08"

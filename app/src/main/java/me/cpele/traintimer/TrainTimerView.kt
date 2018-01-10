@@ -2,7 +2,8 @@ package me.cpele.traintimer
 
 import android.content.Context
 import android.support.constraint.ConstraintLayout
-import android.text.format.DateUtils.*
+import android.text.format.DateUtils.FORMAT_SHOW_TIME
+import android.text.format.DateUtils.formatDateTime
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.TextView
@@ -10,7 +11,8 @@ import java.util.*
 
 class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    private val mDateTextView: TextView
+    // TODO remove prefix
+    private val mDateView: CircularProgressView
     private val mDepartureTimeTextView: TextView
     private val mArrivalTimeTextView: TextView
     private val mDepartureStationTextView: TextView
@@ -28,7 +30,7 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
         LayoutInflater.from(getContext()).inflate(R.layout.view_train_timer, this, true)
 
-        mDateTextView = findViewById(R.id.timer_tv_date)
+        mDateView = findViewById(R.id.timer_cp_date)
         mDepartureTimeTextView = findViewById(R.id.timer_tv_departure_time)
         mArrivalTimeTextView = findViewById(R.id.timer_tv_arrival_time)
         mDepartureStationTextView = findViewById(R.id.timer_tv_departure_station)
@@ -53,16 +55,14 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
     private fun setArrivalDateTime(arrivalDatetime: Long) {
         val strArrivalTime = formatDateTime(context, arrivalDatetime, FORMAT_SHOW_TIME)
+        mDateView.arrivalDateTime = arrivalDatetime
         mArrivalTimeTextView.text = strArrivalTime
     }
 
     private fun setDepartureDateTime(departureDatetime: Long) {
-        val strDepartureDate = formatDateTime(
-                context,
-                departureDatetime,
-                FORMAT_SHOW_DATE or FORMAT_NO_YEAR or FORMAT_ABBREV_MONTH)
-        mDateTextView.text = strDepartureDate
+        mDateView.departureDatetime = departureDatetime
         val strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME)
         mDepartureTimeTextView.text = strDepartureTime
     }
 }
+
