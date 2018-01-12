@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
+
     <declare-styleable name="TrainTimerView">
         <attr name="departure_datetime" format="integer" />
         <attr name="departure_station" format="string" />
         <attr name="arrival_datetime" format="integer" />
         <attr name="arrival_station" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="CircularProgressView">
+        <attr name="circ_departure_datetime" format="integer" />
+        <attr name="circ_arrival_datetime" format="integer" />
     </declare-styleable>
 </resources>

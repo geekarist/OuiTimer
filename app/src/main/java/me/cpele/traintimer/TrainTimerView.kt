@@ -55,12 +55,12 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
     private fun setArrivalDateTime(arrivalDatetime: Long) {
         val strArrivalTime = formatDateTime(context, arrivalDatetime, FORMAT_SHOW_TIME)
-        mDateView.arrivalDateTime = arrivalDatetime
+        mDateView.arrivalDateTime = Date(arrivalDatetime)
         mArrivalTimeTextView.text = strArrivalTime
     }
 
     private fun setDepartureDateTime(departureDatetime: Long) {
-        mDateView.departureDatetime = departureDatetime
+        mDateView.departureDatetime = Date(departureDatetime)
         val strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME)
         mDepartureTimeTextView.text = strDepartureTime
     }

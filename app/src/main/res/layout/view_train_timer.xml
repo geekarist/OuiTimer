@@ -18,8 +18,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@id/timer_tv_departure_time"
         app:layout_constraintTop_toTopOf="parent"
-        custom:arrival_datetime="1540561680"
-        custom:departure_datetime="1540552080"
+        custom:circ_arrival_datetime="1540561680"
+        custom:circ_departure_datetime="1540552080"
         />
 
     <TextView
