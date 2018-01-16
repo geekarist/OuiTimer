@@ -1,25 +1,22 @@
 package me.cpele.traintimer
 
 import android.content.Context
-import android.text.format.DateUtils
-import android.text.format.DateUtils.*
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
-import android.widget.FrameLayout
-import android.widget.TextView
+import android.view.View
 import java.util.*
 
-class CircularProgressView(context: Context, attrs: AttributeSet) : FrameLayout(context, attrs) {
+class CircularProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    var departureDatetime: Date = Date()
-        set(value) {
-            val flags = FORMAT_SHOW_DATE or FORMAT_NO_YEAR or FORMAT_ABBREV_MONTH
-            val strDepartureDate = DateUtils.formatDateTime(context, value.time, flags)
-            viewDepartureDate.text = strDepartureDate
-        }
+    private var dayOfMonth: Int
+    private var strMonth: String
 
-    var arrivalDateTime: Date = Date()
+    var departureDatetime: Date
+    var arrivalDateTime: Date
 
-    private var viewDepartureDate: TextView
+    private var paint: Paint
 
     init {
 
@@ -28,10 +25,24 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : FrameLayout(
         val longArrivalDatetime = styledAttrs.getInt(R.styleable.CircularProgressView_circ_arrival_datetime, 0).toLong()
         styledAttrs.recycle()
 
-        viewDepartureDate = TextView(context)
-        addView(viewDepartureDate)
-
         departureDatetime = Date(longDepartureDatetime)
         arrivalDateTime = Date(longArrivalDatetime)
+
+        dayOfMonth = 26
+        strMonth = "oct"
+        
+        paint = Paint()
+        paint.color = ContextCompat.getColor(context, android.R.color.black)
+        paint.textAlign = Paint.Align.CENTER
+        paint.textSize = context.resources.getDimension(R.dimen.abc_text_size_medium_material);
+    }
+
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
+
+        // Draw day of month
+        canvas?.drawText(dayOfMonth.toString(), canvas.width / 2f, canvas.height / 2f, paint)
+        // Draw month
+        // Draw circular background
     }
 }
