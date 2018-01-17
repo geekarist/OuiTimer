@@ -59,7 +59,14 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
         super.onDraw(canvas)
 
         // Draw day of month
-        canvas?.drawText(dayOfMonth.toString(), canvas.width / 2f, canvas.height / 2f, paintText)
+        val verticalTextOffset = (paintText.descent() + paintText.ascent()) / 2f
+        canvas?.drawText(
+                dayOfMonth.toString(),
+                canvas.width / 2f,
+                canvas.height / 2f - verticalTextOffset,
+                paintText
+        )
+
         // Draw month
         // Draw circular background
         canvas?.drawCircle(canvas.width / 2f, canvas.height / 2f, canvas.height / 2f, paintCircle)
