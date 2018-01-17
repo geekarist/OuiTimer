@@ -19,14 +19,25 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
     var departureDatetime: Date
     var arrivalDateTime: Date
 
+    private val displayMetrics: DisplayMetrics by lazy {
+        val metrics = DisplayMetrics()
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager.defaultDisplay.getMetrics(metrics)
+        metrics
+    }
+
     private val paintText: Paint by lazy {
         val paint = Paint()
         paint.color = ContextCompat.getColor(context, android.R.color.black)
         paint.textAlign = Paint.Align.CENTER
-        val metrics = DisplayMetrics()
-        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
-        windowManager.defaultDisplay.getMetrics(metrics)
-        paint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12f, metrics)
+        paint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12f, displayMetrics)
+        paint
+    }
+
+    private val paintCircle: Paint by lazy {
+        val paint = Paint()
+        paint.color = ContextCompat.getColor(context, android.R.color.darker_gray)
+        paint.style = Paint.Style.STROKE
         paint
     }
 
@@ -51,5 +62,6 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
         canvas?.drawText(dayOfMonth.toString(), canvas.width / 2f, canvas.height / 2f, paintText)
         // Draw month
         // Draw circular background
+        canvas?.drawCircle(canvas.width / 2f, canvas.height / 2f, canvas.height / 2f, paintCircle)
     }
 }
