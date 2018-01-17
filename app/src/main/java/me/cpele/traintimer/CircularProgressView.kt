@@ -5,7 +5,10 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.support.v4.content.ContextCompat
 import android.util.AttributeSet
+import android.util.DisplayMetrics
+import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 import java.util.*
 
 class CircularProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
@@ -34,7 +37,10 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
         paint = Paint()
         paint.color = ContextCompat.getColor(context, android.R.color.black)
         paint.textAlign = Paint.Align.CENTER
-        paint.textSize = context.resources.getDimension(R.dimen.abc_text_size_medium_material);
+        val metrics = DisplayMetrics()
+        val windowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+        windowManager.defaultDisplay.getMetrics(metrics)
+        paint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12f, metrics)
     }
 
     override fun onDraw(canvas: Canvas?) {
