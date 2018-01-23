@@ -54,13 +54,20 @@
         tools:text="13:48"
         />
 
-    <View
+    <android.support.constraint.Guideline
         android:id="@+id/timer_gl_second"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="120dp"
+        />
+
+    <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
         android:background="@color/colorPrimaryDark"
-        app:layout_constraintLeft_toRightOf="@id/timer_tv_departure_time"
-        app:layout_constraintRight_toLeftOf="@id/timer_tv_departure_station"
+        app:layout_constraintLeft_toLeftOf="@id/timer_gl_second"
         />
 
     <TextView
