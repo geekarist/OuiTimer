@@ -11,12 +11,11 @@ import java.util.*
 
 class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {
 
-    // TODO remove prefix
-    private val mDateView: CircularProgressView
-    private val mDepartureTimeTextView: TextView
-    private val mArrivalTimeTextView: TextView
-    private val mDepartureStationTextView: TextView
-    private val mArrivalStationTextView: TextView
+    private val dateView: CircularProgressView
+    private val departureTimeTextView: TextView
+    private val arrivalTimeTextView: TextView
+    private val departureStationTextView: TextView
+    private val arrivalStationTextView: TextView
 
     init {
         val typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.TrainTimerView)
@@ -30,11 +29,11 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
         LayoutInflater.from(getContext()).inflate(R.layout.view_train_timer, this, true)
 
-        mDateView = findViewById(R.id.timer_cp_date)
-        mDepartureTimeTextView = findViewById(R.id.timer_tv_departure_time)
-        mArrivalTimeTextView = findViewById(R.id.timer_tv_arrival_time)
-        mDepartureStationTextView = findViewById(R.id.timer_tv_departure_station)
-        mArrivalStationTextView = findViewById(R.id.timer_tv_arrival_station)
+        dateView = findViewById(R.id.timer_cp_date)
+        departureTimeTextView = findViewById(R.id.timer_tv_departure_time)
+        arrivalTimeTextView = findViewById(R.id.timer_tv_arrival_time)
+        departureStationTextView = findViewById(R.id.timer_tv_departure_station)
+        arrivalStationTextView = findViewById(R.id.timer_tv_arrival_station)
 
         setDepartureDateTime(departureDatetime)
         setArrivalDateTime(arrivalDatetime)
@@ -43,11 +42,11 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
     }
 
     fun setArrivalStation(arrivalStation: String?) {
-        mArrivalStationTextView.text = arrivalStation
+        arrivalStationTextView.text = arrivalStation
     }
 
     fun setDepartureStation(departureStation: String?) {
-        mDepartureStationTextView.text = departureStation
+        departureStationTextView.text = departureStation
     }
 
     fun setDepartureDateTime(departureDatetime: Date) = setDepartureDateTime(departureDatetime.time)
@@ -55,14 +54,14 @@ class TrainTimerView(context: Context, attrs: AttributeSet) : ConstraintLayout(c
 
     private fun setArrivalDateTime(arrivalDatetime: Long) {
         val strArrivalTime = formatDateTime(context, arrivalDatetime, FORMAT_SHOW_TIME)
-        mDateView.arrivalDateTime = Date(arrivalDatetime)
-        mArrivalTimeTextView.text = strArrivalTime
+        dateView.arrivalDateTime = Date(arrivalDatetime)
+        arrivalTimeTextView.text = strArrivalTime
     }
 
     private fun setDepartureDateTime(departureDatetime: Long) {
-        mDateView.departureDatetime = Date(departureDatetime)
+        dateView.departureDatetime = Date(departureDatetime)
         val strDepartureTime = formatDateTime(context, departureDatetime, FORMAT_SHOW_TIME)
-        mDepartureTimeTextView.text = strDepartureTime
+        departureTimeTextView.text = strDepartureTime
     }
 }
 
