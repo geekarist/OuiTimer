@@ -13,9 +13,6 @@ import java.util.*
 
 class CircularProgressView(context: Context, attrs: AttributeSet) : View(context, attrs) {
 
-    private var dayOfMonth: Int
-    private var strMonth: String
-
     var departureDatetime: Date
     var arrivalDateTime: Date
 
@@ -30,17 +27,13 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
         metrics
     }
 
-    private val paintText: Paint by lazy {
-        val paint = Paint()
-        paint.color = ContextCompat.getColor(context, android.R.color.black)
-        paint.textAlign = Paint.Align.CENTER
-        paint.textSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 12f, displayMetrics)
-        paint
+    private val contentHeight: Int by lazy {
+        TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24f, displayMetrics).toInt()
     }
 
     private val paintCircle: Paint by lazy {
         val paint = Paint()
-        paint.color = ContextCompat.getColor(context, android.R.color.darker_gray)
+        paint.color = ContextCompat.getColor(context, R.color.blue_duck)
         paint.style = Paint.Style.STROKE
         paint.strokeWidth =
                 TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1f, displayMetrics)
@@ -55,23 +48,32 @@ class CircularProgressView(context: Context, attrs: AttributeSet) : View(context
 
         departureDatetime = Date(longDepartureDatetime)
         arrivalDateTime = Date(longArrivalDatetime)
+    }
 
-        dayOfMonth = 26
-        strMonth = "oct"
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+
+        val measuredWidth: Int = when (MeasureSpec.getMode(widthMeasureSpec)) {
+            MeasureSpec.EXACTLY -> MeasureSpec.getSize(widthMeasureSpec)
+            MeasureSpec.AT_MOST -> MeasureSpec.getSize(widthMeasureSpec)
+            MeasureSpec.UNSPECIFIED -> contentHeight
+            else -> throw IllegalStateException()
+        }
+
+        val measuredHeight: Int = when (MeasureSpec.getMode(heightMeasureSpec)) {
+            MeasureSpec.EXACTLY -> MeasureSpec.getSize(heightMeasureSpec)
+            MeasureSpec.AT_MOST -> MeasureSpec.getSize(widthMeasureSpec)
+            MeasureSpec.UNSPECIFIED -> contentHeight
+            else -> throw IllegalStateException()
+        }
+
+        setMeasuredDimension(MeasureSpec.getSize(measuredWidth), MeasureSpec.getSize(measuredHeight))
     }
 
     override fun onDraw(canvas: Canvas?) {
         super.onDraw(canvas)
 
         // Draw day of month
-        val verticalTextOffset = (paintText.descent() + paintText.ascent()) / 2f
-        canvas?.drawText(
-                dayOfMonth.toString(),
-                canvas.width / 2f,
-                canvas.height / 2f - verticalTextOffset,
-                paintText
-        )
-
         // Draw month
         // Draw circular background
         canvas?.drawCircle(
